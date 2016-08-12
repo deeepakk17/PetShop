@@ -11,25 +11,29 @@
 	<!-- include navigation bar -->
 
 	<%@ include file="header.jsp"%>
+	<div class="container">
+		<div class="col-md-4 col-offset-4">
+			<c:url var="login" value="/login"></c:url>
+			<form:form role="form" action="${login}" method="post">
 
-	<c:url var="login" value="/login"></c:url>
-	<form:form action="${login}" method="post">
-		<table border="1" align="center">
-			<tr>
-				<td>Username</td>
-				<td><input type="text" name="username"></td>
-			</tr>
-
-			<tr>
-				<td>Password</td>
-				<td><input type="password" name="password"></td>
-			</tr>
-
-			<tr>
-				<td><input type="submit" value="Login"></td>
-			</tr>
-		</table>
-	</form:form>
+				<div class="form-group">
+					<label for="username">Username:</label> 
+					<input type="text"
+						class="form-control" name="username">
+					<form:errors path="username" />
+				</div>
+				<div class="form-group">
+					<label for="password">Password:</label> <input type="password"
+						class="form-control" name="password">
+					<form:errors path="password" />
+				</div>
+				<div class="checkbox">
+					<label><input type="checkbox"> Remember me</label>
+				</div>
+				<button type="submit" value="Login" class="btn btn-default">Submit</button>
+			</form:form>
+		</div>
+	</div>
 	<!-- include Footer -->
 	<%@ include file="footer.jsp"%>
 </body>

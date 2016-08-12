@@ -14,9 +14,11 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import pro.niit.petshop.dao.UserDAO;
+import pro.niit.petshop.dao.UserDAOImpl;
+import pro.niit.petshop.model.CategoryDetails;
+import pro.niit.petshop.model.ProductDetails;
 import pro.niit.petshop.model.UserDetails;
-
-
 
 @Configuration
 @EnableTransactionManagement
@@ -49,6 +51,8 @@ public class ApplicationContextConfig {
 		LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
 		sessionBuilder.addProperties(getHibernateProperties());
 		sessionBuilder.addAnnotatedClass(UserDetails.class);
+		sessionBuilder.addAnnotatedClass(CategoryDetails.class);
+		sessionBuilder.addAnnotatedClass(ProductDetails.class);
 
 		return sessionBuilder.buildSessionFactory();
 	}
@@ -61,4 +65,10 @@ public class ApplicationContextConfig {
 		return transactionManager;
 	}
 
+	@Autowired
+	@Bean(name = "userDAO")
+	public UserDAO getProductDAO(SessionFactory sessionFactory) {
+
+		return new UserDAOImpl(sessionFactory);
+	}
 }

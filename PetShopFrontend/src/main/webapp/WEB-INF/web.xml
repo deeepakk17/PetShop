@@ -14,7 +14,10 @@
  
 	<servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>
+		<!-- only url's with extension mentioned in url-pattern will be directed 
+			to spring controller -->
 		<url-pattern>/</url-pattern>
+		<url-pattern>*.obj</url-pattern>
 	</servlet-mapping>
  
 	<context-param>

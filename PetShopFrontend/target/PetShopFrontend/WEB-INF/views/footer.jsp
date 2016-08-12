@@ -5,21 +5,33 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style type="text/css">
-.footertext {
-	padding-left: 40%;
-	background-color: #bbb6b6;
-}
-</style>
+<script src="assets/js/jquery.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/jquery.prettyPhoto.js"></script>
+<script src="assets/js/jquery.isotope.min.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/wow.min.js"></script>
 </head>
 <body>
-	<!-- Footer -->
-	<footer>
-		<div class="row footertext">
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				<p>Copyright &copy; PetShop 2016</p>
-			</div>
-		</div>
-	</footer>
+	<!-- footer -->
+<footer id="footer" class="midnight-blue">
+<div class="container">
+<div class="row">
+<div class="col-sm-6">
+&copy; 2016 <a target="_blank" href="#" title="Petshop Official Website">PetShop</a>. All Rights Reserved.
+</div>
+<div class="col-sm-6">
+<ul class="pull-right">
+<li><a href="#">Home</a></li>
+<li><a href="#">About Us</a></li>
+<li><a href="#">Faq</a></li>
+<li><a href="#">Contact Us</a></li>
+</ul>
+</div>
+</div>
+</div>
+</footer> 
+<!-- /footer -->
+
 </body>
 </html>

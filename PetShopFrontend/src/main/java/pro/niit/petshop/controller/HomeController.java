@@ -13,6 +13,10 @@ public class HomeController {
 		return mv;
 	}
 
-	
+	 @RequestMapping("/adminhome") 
+	 public ModelAndView goadminhome() {
+	 ModelAndView modelAndView = new ModelAndView("adminhome"); 
+	 return	 modelAndView; 
+	 }
 	
 }
