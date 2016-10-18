@@ -3,12 +3,9 @@ package pro.niit.petshop.dao;
 
 import java.util.List;
 
-
-
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,6 +50,23 @@ public class ProductDAOImpl implements ProductDAO {
 		sessionFactory.getCurrentSession().delete(productToDelete);
 		
 	}
+	
+	
+	
+	@Transactional
+	public List <ProductDetails> getByCategoryId(String category)
+	{
+		String hql="from ProductDetails where category  =" + "'" + category + "'";
+		Query query=sessionFactory.getCurrentSession().createQuery(hql);				
+		List<ProductDetails> listProduct = query.list();
+		
+		if(listProduct!= null && !listProduct.isEmpty()) {
+			return listProduct;
+			
+		}
+		return null;
+	}
+
 	
 	@Transactional
 	public List<ProductDetails> list() {

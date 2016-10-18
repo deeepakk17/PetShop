@@ -33,16 +33,20 @@
 
 #login-box {
 	width: 60%;
-	padding: 20px;
-	margin: 100px auto;
+	padding: 30px;
+	margin: 13px auto;
 	background: #fff;
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
 	border: 1px solid #000;
 }
 </style>
+<script type="text/javascript">
+window.history.forward();
+function noBack() {window.history.forward();}
+</script>
 </head>
-<body onload='document.loginForm.username.focus();'>
+<body onload='noBack(); document.loginForm.username.focus();' onpageshow="if (event.persisted) noBack();" onunload="">
 
 <!-- include navigation bar -->
 
@@ -51,8 +55,8 @@
 	<!-- Page Header -->
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<h1 class="page-header" style="text-align: center">
-				Login with Username and Password <small></small>
+			<h1 class="" style="font-family: 'comic Sans MS', cursive, sans-serif;text-align: center">
+				<i class="fa fa-paw" aria-hidden="true"></i>  Enter our world   <small></small>
 			</h1>
 		</div>
 	</div>
@@ -85,7 +89,7 @@
 					<label><input type="checkbox"> Remember me</label>
 				</div>
 			<div>
-				<input name="submit" type="submit" value="submit" class="btn btn-primary" />
+				<input name="submit" type="submit" value="Explore" class="btn btn-primary" />
 			</div>
 
 

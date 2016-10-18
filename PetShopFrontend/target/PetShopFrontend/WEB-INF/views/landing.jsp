@@ -10,9 +10,17 @@
 <body>
 	<!-- include navigation bar -->
 	<%@ include file="header.jsp"%>
-
+		
+			<%-- <a href="<c:url value='/goview' />" >sdhbkhzxbchkzxjczjggdug</a> --%>						
 	<!-- include carousel -->
 	<%@ include file="carousel.jsp"%>
+	
+	<!-- <div style="background-color: green; width: 15px;height:150px; position: fixed ;top:100px;left:0px;">
+	Contact Us
+	</div> -->
+	
+	<!-- include pets -->
+	<%@ include file="homepets.jsp"%> 
 	
 	<!-- include carousel -->
 	<%@ include file="services.jsp"%>

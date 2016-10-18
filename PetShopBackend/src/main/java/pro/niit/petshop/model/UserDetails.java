@@ -5,28 +5,27 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.validation.constraints.Size;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.binding.message.MessageBuilder;
-import org.springframework.binding.message.MessageContext;
+import org.hibernate.validator.constraints.Email;
 import org.springframework.stereotype.Component;
 
-import pro.niit.petshop.dao.UserDAO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * @author Project
+ * 
  *
  */
 @Entity
 @Table(name = "USER_DETAILS")
 @Component
-public class UserDetails implements Serializable {
+public class UserDetails implements Serializable {	
 	
-	
-	// Pojo class for user table
+		// Pojo class for user table
 
 		@Transient
 		private static final long serialVersionUID = 4657462015039726030L;
@@ -47,7 +46,22 @@ public class UserDetails implements Serializable {
 		//@Size(min = 10, max = 10, message = "Mobilenumber must be 10 characters !")
 		@Column(name = "MOBILE_NUMBER", columnDefinition = "number(10)")
 		private String mobilenumber;
-
+		
+		
+		@Email
+		@Column(name = "EMAIL_ID")		
+		private String email;
+		
+		
+		@OneToOne
+	    @JoinColumn(name = "addressId")
+	    private Address address;
+		
+		@OneToOne
+	    @JoinColumn(name = "cartId")
+	    @JsonIgnore
+	    private UserCart cart; 
+	    
 		//@Size(min = 5, max = 15, message = "Password must be atleast 5 - 15 characters !")
 		@Column(name = "PASSWORD", columnDefinition = "varchar(15)")
 		private String password;
@@ -59,7 +73,6 @@ public class UserDetails implements Serializable {
 
 		@Column(name = "ENABLED",nullable=false)
 		private boolean enabled = true;
-
 		
 
 		public boolean isEnabled() {
@@ -101,6 +114,22 @@ public class UserDetails implements Serializable {
 		public void setMobilenumber(String mobilenumber) {
 			this.mobilenumber = mobilenumber;
 		}
+		
+		public String getEmail() {
+			return email;
+		}
+
+		public void setEmail(String email) {
+			this.email = email;
+		}
+
+		public Address getAddress() {
+			return address;
+		}
+
+		public void setAddress(Address address) {
+			this.address = address;
+		}
 
 		public String getPassword() {
 			return password;
@@ -115,7 +144,15 @@ public class UserDetails implements Serializable {
 		}
 
 		public void setConfirmpassword(String confirmpassword) {
-			this.confirmpassword = confirmpassword;
+			this.confirmpassword = confirmpassword;		}
+		
+
+		public UserCart getCart() {
+			return cart;
+		}
+
+		public void setCart(UserCart cart) {
+			this.cart = cart;
 		}
 
 		@Override
@@ -124,12 +161,6 @@ public class UserDetails implements Serializable {
 					+ ", mobilenumber=" + mobilenumber + ", password=" + password + ", confirmpassword=" + confirmpassword
 					+ ", enabled=" + enabled + "]";
 		}
-
-		
-
-		
-
-
 	
 
 }

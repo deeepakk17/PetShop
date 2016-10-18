@@ -1,21 +1,43 @@
 package pro.niit.petshop.controller;
 
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import pro.niit.petshop.dao.CartDAO;
+import pro.niit.petshop.dao.ProductDAO;
+import pro.niit.petshop.dao.UserDAO;
 import pro.niit.petshop.model.UserDetails;
 
 @Controller
 public class UserController {
 
-		
+	@Autowired
+	private CartDAO cartDAO;
 	
+	@Autowired
+	private UserDAO userDAO;
+	
+	@Autowired
+	private UserDetails userDetails;
+
+	
+
+	@Autowired
+	private ProductDAO productDAO;
+
+	String loggedInUser;
+
+	
+	//Handler for spring security login
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView login(@RequestParam(value = "error", required = false) String error,
 			@RequestParam(value = "logout", required = false) String logout) {
@@ -34,94 +56,59 @@ public class UserController {
 		return modelAndView;
 
 	}
-	
-	@RequestMapping(value =  "/home" )
-	public ModelAndView gohomepage() {
-		ModelAndView mv = new ModelAndView("homepage");
-		return mv;
+
+	//handler to redirect user home page
+	@RequestMapping(value = "/home")
+	public ModelAndView gohomepage(HttpSession session, HttpServletRequest servletRequest) {
+		String username = servletRequest.getUserPrincipal().getName();
+		session.setAttribute("loggedInUser", username);
+		ModelAndView modelAndView = new ModelAndView("homepage");
+		modelAndView.addObject("productList", this.productDAO.list());
+		// modelAndView.addObject("itemCount", cartDAO.itemCount(loggedInUser));
+		return modelAndView;
+	}
+
+	// for 403 access denied page
+	@RequestMapping(value = "/403", method = RequestMethod.GET)
+	public ModelAndView accessDenied() {
+
+		ModelAndView model = new ModelAndView();
+		
+		model.setViewName("403");
+		return model;
+
 	}
 	
-	//for 403 access denied page
-		@RequestMapping(value = "/403", method = RequestMethod.GET)
-		public ModelAndView accessDenied() {
-
-			ModelAndView model = new ModelAndView();
-			
-			//check if user is login
-			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			if (!(auth instanceof AnonymousAuthenticationToken)) {
-				UserDetails userDetail = (UserDetails) auth.getPrincipal();
-				System.out.println(userDetail);
-			
-				model.addObject("username", userDetail.getUsername());
-				
-			}			
-			model.setViewName("403");
-			return model;
-
-		}
 	
+	//reset password handler
+	@RequestMapping(value = "/user/resetpassword")
+	public ModelAndView editProduct() {
+		ModelAndView modelAndView = new ModelAndView("resetpassword");
 		
+		modelAndView.addObject(new UserDetails());
+		return modelAndView;
 
-	/*@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public ModelAndView userregister(@Valid @ModelAttribute UserDetails userDetails, BindingResult result) {
+	}
+	
+	
+	//handler to change your password
+	@RequestMapping(value = "/user/resetpassword", method = RequestMethod.POST)
+	public ModelAndView addProduct(@ModelAttribute("userDetails") UserDetails newUserPassword,HttpServletRequest servletRequest) {
 		ModelAndView modelAndView = new ModelAndView();
-		if (result.hasErrors()) {
-			modelAndView.setViewName("signup");
-
-		} else {
+		String username = servletRequest.getUserPrincipal().getName();
+		UserDetails userDetails = userDAO.getUserByUsername(username);
+		if (newUserPassword.getPassword().equals(newUserPassword.getConfirmpassword())) {
+			userDetails.setPassword(newUserPassword.getPassword());
 			userDAO.saveOrUpdate(userDetails);
-			modelAndView.setViewName("home");
-			modelAndView.addObject("successmessage", "You are Registered Successfully");
-
+			modelAndView.setViewName("redirect:/home"); 
+			
+		}
+		else {
+			modelAndView.addObject("error", "Password doesn't match!");
+			modelAndView.setViewName("resetpassword");
 		}
 		return modelAndView;
-
-	}*/
-
-	/*@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView userlogin(@RequestParam("username") String username, @RequestParam("password") String password,
-			HttpSession httpSession) {
-
-		UserDetails userDetails = new UserDetails();
-		userDetails.setUsername(username);
-		userDetails.setPassword(password);
-		boolean isvaliduser = userDAO.checkUser(userDetails);
-
-		if (isvaliduser == true) {
-			boolean isadmin = userDAO.isAdmin(userDetails);
-			httpSession.setAttribute("loggedInUser", userDetails.getUsername());
-			if (isadmin == true) {
-				ModelAndView modelAndView = new ModelAndView("adminhome");
-				modelAndView.addObject("message", "hello welcome");
-				modelAndView.addObject("name", userDetails.getUsername());
-				return modelAndView;
-			} else {
-				System.out.println("n lgn");
-				ModelAndView modelAndView = new ModelAndView("home");
-				modelAndView.addObject("message", "hello welcome");
-				modelAndView.addObject("name", userDetails.getUsername());
-				return modelAndView;
-
-			}
-
-		} else {
-			ModelAndView modelAndView = new ModelAndView("login");
-			modelAndView.addObject("message", "Invalid Credentials");
-			return modelAndView;
-		}
-
 	}
-*/
-	/*@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public ModelAndView userlogoutpage(HttpSession httpSession) {
-		SecurityContextHolder.getContext().setAuthentication(null);
-		httpSession.setAttribute("pageContext.request.userPrincipal.name", null);
-		
-		ModelAndView modelAndView = new ModelAndView("landing");
-		return modelAndView;
-	}*/
-	
 	
 	
 }

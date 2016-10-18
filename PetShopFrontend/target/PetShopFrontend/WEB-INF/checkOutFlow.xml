@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+                          http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+                          
+    <var name="orderDetails" class="pro.niit.petshop.model.OrderDetails" />
+    <var name="address" class="pro.niit.petshop.model.Address" />
+    
+      
+   <action-state id="addCartToOrder">
+        <evaluate expression="cartDAO.getUserCartList(requestParameters.cartId)" result="orderDetails.cart" />
+        <transition to="collectUserDetails" />
+    </action-state>
+                          
+    <view-state id="collectUserDetails" view="collectCustomerDetails" model="address">
+        <transition on="submit" to="saveorder" />
+    </view-state>    
+    
+    <action-state id="saveorder">
+        <evaluate expression="checkOutHandler.saveAddress(address)" result="orderDetails.billingaddress" />
+        <transition to="getorderdetails" />
+    </action-state>
+    
+    <action-state id="getorderdetails">
+        <evaluate expression="cartDAO.getCartItemById(orderDetails.cart.cartId)" result="orderDetails.cartItemList" />
+        <transition to="orderConfirmation" />
+    </action-state>
+
+	<view-state id="orderConfirmation" view="orderConfirmation"  >
+		<transition on="submit" to="processOrder" />
+		<transition on="back" to="collectUserDetails" />
+	</view-state>
+	
+	<view-state id="paymentMethod" view="choosepaymentmethod"  >
+		<transition on="toprocessOrder" to="processOrder" />
+	</view-state>
+	
+	
+	<action-state id="processOrder">
+        <evaluate expression="checkOutHandler.saveOrUpdate(orderDetails)" />
+        <transition to="ordersuccess" />
+    </action-state>
+
+
+	<end-state id="ordersuccess" view="ordersuccess" />
+                          
+
+	
+</flow>

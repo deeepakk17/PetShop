@@ -11,7 +11,7 @@
 	<!-- include navigation bar -->
 	<%@ include file="header.jsp"%>
 		
-									
+			<%-- <a href="<c:url value='/goview' />" >sdhbkhzxbchkzxjczjggdug</a> --%>						
 	<!-- include carousel -->
 	<%@ include file="carousel.jsp"%>
 	

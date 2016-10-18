@@ -19,12 +19,20 @@ public class HomeController {
 		mv.addObject("productList",this.productDAO.list());
 		return mv;
 	}
+	
+	//returns aboutus page
+	@RequestMapping("/aboutus")
+	public String goaboutus() {
+		return "aboutus";
+	}
 
+	//returns the home page for admin
 	@RequestMapping("/admin/home")
 	public String goadminhome() {
 		return "adminhome";
 	}
 
+	//handler for displaying 404 error page
 	@RequestMapping("/error")
 	public String goerrorpage() {
 

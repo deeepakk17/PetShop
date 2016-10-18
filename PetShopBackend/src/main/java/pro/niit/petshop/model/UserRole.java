@@ -26,7 +26,7 @@ public class UserRole  {
 	@Column(name = "ROLE", columnDefinition = "varchar(15)")
 	private String role;
 	
-	//@Size(min = 3, message = "Username must be atleast 3 characters !")
+	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="username")
 	private UserDetails username;

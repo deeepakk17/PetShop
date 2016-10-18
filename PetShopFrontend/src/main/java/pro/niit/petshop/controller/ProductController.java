@@ -5,7 +5,6 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,6 +38,7 @@ public class ProductController {
 	@Autowired
 	private CategoryDetails categoryDetails;
 
+	//to manage products page for admin
 	@RequestMapping(value = "/admin/gomanageproducts", method = RequestMethod.GET)
 	public ModelAndView gomanageproducts() {
 		ModelAndView modelAndView = new ModelAndView("manageproducts");
@@ -49,6 +49,7 @@ public class ProductController {
 		return modelAndView;
 	}
 
+	//handler to add new pets
 	@RequestMapping(value = "/admin/addproduct", method = RequestMethod.POST)
 	public ModelAndView addProduct(@Valid @ModelAttribute("productDetails") ProductDetails productDetails,
 			BindingResult result) {
@@ -63,10 +64,12 @@ public class ProductController {
 			MultipartFile file = productDetails.getMultipartFile();
 
 			FileHandler.upload(path, file, productDetails.getId() + ".jpg");
+			CategoryDetails categoryDetails = categoryDAO.getByName(productDetails.getCategory().getName());
+			productDetails.setCategory(categoryDetails);
 			productDAO.saveOrUpdate(productDetails);
-			modelAndView = new ModelAndView();
+		//	modelAndView = new ModelAndView();
 			productDetails= new ProductDetails();
-			modelAndView.addObject(productDetails);
+			modelAndView.addObject("productDetails",productDetails);
 			modelAndView.setViewName("manageproducts");
 			modelAndView.addObject("productList", this.productDAO.list());
 			modelAndView.addObject("categoryList", this.categoryDAO.list());
@@ -75,6 +78,8 @@ public class ProductController {
 		return modelAndView;
 	}
 	
+	
+	//handler to edit existing pet information
 	@RequestMapping(value = "product/edit/{id}")
 	public ModelAndView editProduct(@PathVariable("id") String id) {
 		ModelAndView modelAndView = new ModelAndView("manageproducts");
@@ -86,22 +91,25 @@ public class ProductController {
 
 	}
 
+	
+	//handler to delete existing pets
 	@RequestMapping(value = "product/delete/{id}")
 	public ModelAndView deleteProduct(@PathVariable("id") String id) {
 		ModelAndView modelAndView = new ModelAndView("manageproducts");
 		productDAO.delete(id);
-		modelAndView.addObject(productDetails);
+		modelAndView.addObject(new ProductDetails());
 		modelAndView.addObject("productList", this.productDAO.list());
 		modelAndView.addObject("categoryList", this.categoryDAO.list());
 		return modelAndView;
 	}
 	
+	
+	//List all pets
 	@RequestMapping(value = "/product/list", method = RequestMethod.GET)
 	public @ResponseBody List<ProductDetails> listProduct() {
 		
-		List<ProductDetails> listtt =  this.productDAO.list();
+		List<ProductDetails> listtt  =  this.productDAO.list();
 		
-		System.out.println("n prduct lst cntrller");
 		return listtt;
 	}
 

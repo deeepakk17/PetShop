@@ -26,7 +26,7 @@
 						</div>
 						<div class="media-body">
 							<h3 class="media-heading">Dogs</h3>
-							<p>Lorem ipsum dolor sit ame consectetur adipisicing elit</p>
+							<p>Check our wide variety of dog breeds</p>
 						</div>
 					</div>
 				</div>
@@ -38,7 +38,7 @@
 						</div>
 						<div class="media-body">
 							<h3 class="media-heading">Cats</h3>
-							<p>Lorem ipsum dolor sit ame consectetur adipisicing elit</p>
+							<p>Check our wide variety of Cat breeds</p>
 						</div>
 					</div>
 				</div>
@@ -50,7 +50,7 @@
 						</div>
 						<div class="media-body">
 							<h3 class="media-heading">Birds</h3>
-							<p>Lorem ipsum dolor sit ame consectetur adipisicing elit</p>
+							<p>Check our wide collections of Birds </p>
 						</div>
 					</div>
 				</div>
@@ -62,7 +62,7 @@
 						</div>
 						<div class="media-body">
 							<h3 class="media-heading">Fishes</h3>
-							<p>Lorem ipsum dolor sit ame consectetur adipisicing elit</p>
+							<p>Check our wide variety of Fishes</p>
 						</div>
 					</div>
 				</div>
@@ -74,7 +74,7 @@
 						</div>
 						<div class="media-body">
 							<h3 class="media-heading">Pet Supplies</h3>
-							<p>Lorem ipsum dolor sit ame consectetur adipisicing elit</p>
+							<p>Enriched Nutritious supplies for your pets</p>
 						</div>
 					</div>
 				</div>
@@ -86,7 +86,7 @@
 						</div>
 						<div class="media-body">
 							<h3 class="media-heading">Services</h3>
-							<p>Lorem ipsum dolor sit ame consectetur adipisicing elit</p>
+							<p>Pet services at your door steps </p>
 						</div>
 					</div>
 				</div>

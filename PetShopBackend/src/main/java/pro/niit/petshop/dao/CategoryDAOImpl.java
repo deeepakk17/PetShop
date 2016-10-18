@@ -2,7 +2,6 @@ package pro.niit.petshop.dao;
 
 import java.util.List;
 
-
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -55,6 +54,26 @@ public class CategoryDAOImpl implements CategoryDAO {
 		categoryToDelete.setId(id);
 		sessionFactory.getCurrentSession().delete(categoryToDelete);
 		
+	}
+	
+	
+	
+	
+	
+	@Transactional
+	public CategoryDetails getByName(String categoryname)
+	{
+		String hql="from CategoryDetails where name  =" + "'" + categoryname + "'";
+		Query query=sessionFactory.getCurrentSession().createQuery(hql);
+				
+		@SuppressWarnings("unchecked")
+		List<CategoryDetails> listCategory = query.list();
+		
+		if(listCategory!= null && !listCategory.isEmpty()) {
+			return listCategory.get(0);
+			
+		}
+		return null;
 	}
 
 }
