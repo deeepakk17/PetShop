@@ -66,26 +66,26 @@ public class UserHandler {
 					new MessageBuilder().error().source("password").defaultText("Password cannot be Empty").build());
 			status = "failure";
 		}
-		if (userDetails.getConfirmpassword().isEmpty()) {
+		/*if (userDetails.getConfirmpassword().isEmpty()) {
 			messageContext.addMessage(new MessageBuilder().error().source("confirmpassword")
 					.defaultText("Confirmpassword cannot be Empty").build());
 			status = "failure";
-		}
-		/*if(userList !=  null){
+		}*/
+		if(userList !=  null){
 		    for (int i=0; i < userList.size(); i++){
-		        if(userDetails.getUsername() == userList.get(i).getUsername()){            
+		        if(userDetails.getUsername().equals(userList.get(i).getUsername())){            
 		        	messageContext.addMessage(new MessageBuilder().error().source("username")
 							.defaultText("Username already exists").build());
 					status = "failure";
 		        }
-		        if(userDetails.getEmail() == userList.get(i).getUsername()){            
+		        if(userDetails.getEmail().equals(userList.get(i).getUsername())){            
 		        	messageContext.addMessage(new MessageBuilder().error().source("email")
 							.defaultText("Email already exists").build());
 					status = "failure";
 		        }
 		    }
 		    
-		}*/
+		}
 		return status;
 	}
 

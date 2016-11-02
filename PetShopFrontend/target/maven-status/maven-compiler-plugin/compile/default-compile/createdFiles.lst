@@ -2,7 +2,6 @@ pro\niit\petshop\controller\HomeController.class
 pro\niit\petshop\controller\CartController.class
 pro\niit\petshop\controller\MailMail.class
 pro\niit\petshop\controller\ProductController.class
-pro\niit\petshop\controller\CheckMail.class
 pro\niit\petshop\controller\UserController.class
 pro\niit\petshop\controller\CategoryController.class
 pro\niit\petshop\controller\PetController.class

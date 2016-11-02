@@ -25,13 +25,14 @@
 
 <c:if test="${not empty cartList}">	
 	<div>
-		<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+		<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 			<h1 class="" style="font-family: 'comic Sans MS', cursive, sans-serif;text-align: center">
 				You are about to own.. 
 							</h1>
 		</div>
-		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-		<a class="btn btn-primary" href="<c:url value = "/order/${cartId}" />">CHECKOUT</a>
+		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+		<a class="btn btn-primary" href="<c:url value = "/viewallpet" />">Continue Shopping</a>
+		<a class="btn btn-primary" href="<c:url value = "/order/${cartId}" />">Checkout</a>
 		
 		
 		</div>

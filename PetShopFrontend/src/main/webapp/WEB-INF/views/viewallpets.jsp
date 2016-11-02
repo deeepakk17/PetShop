@@ -123,7 +123,7 @@
 								<i class="fa fa-search"></i>
 							</div>
 							<input type="text" class="form-control"
-								placeholder="Search for pets" data-ng-model="searchItem">
+								placeholder="Search for pets" data-ng-model="searchItem.name">
 						</div>
 					</div>
 				</form>
@@ -240,6 +240,8 @@
 
 	<!-- include Footer -->
 	<%@ include file="footer.jsp"%>
+	
+	
 	<script type="text/javascript">
 		var data = ${item};
 		var app = angular.module('displayApp', [])

@@ -188,8 +188,8 @@ body {
 								<li class="dropdown">
 								<li><a
 									href="<c:url value = "/user/carthistory" />">Order History</a></li>
-								<li><a
-									href="<c:url value = "/user/resetpassword" />">Password Reset</a></li>
+								 <li><a
+									href="<c:url value = "/user/resetpassword" />">Reset Password</a></li> 
 								<li><a
 									href="<c:url value = "/login?logout" />">Logout</a></li>
 							</ul>

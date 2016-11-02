@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -177,10 +178,23 @@ public class CartController {
 
 	//delete cart by id
 	@RequestMapping("/deletecart/{id}")
-	public String deletecart(@PathVariable("id") int id) {
+	public String deletecart(@PathVariable("id") int id,HttpServletRequest servletRequest ) {
 		cartDAO.delete(id);
+		String username = servletRequest.getUserPrincipal().getName();
+		UserDetails userDetails = userDAO.getUserByUsername(username);
+        UserCart userCart = userDetails.getCart();
+        userCart.setGrandTotal(cartDAO.getSumOfTotalPrice(userDetails.getCart().getCartId()));
+        cartDAO.saveOrUpdate(userCart);
+		
 		return "redirect:/user/viewusercart";
 	}
+	
+	
+		/*@RequestMapping("/deletecart/{id}")
+		public String deletecart(@PathVariable("id") int id) {
+			cartDAO.delete(id);
+			return "redirect:/user/viewusercart";
+		}*/
 
 /*	-----------------------------------------------------------------------------------------------*/
 	/*

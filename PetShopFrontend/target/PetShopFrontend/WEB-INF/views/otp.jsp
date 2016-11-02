@@ -11,7 +11,7 @@
 	<%@ include file="header.jsp"%>
 	<div class="container">
 		<form:form modelAttribute="oTP">
-			<center>Enter OTP : Check your Mail</center>
+			<center style="color: white">Enter OTP : Check your Mail</center>
 			<form:input path="otp" class="form-control" />
 			<c:forEach
 				items="${flowRequestContext.messageContext.getMessagesBySource('otp')}"
@@ -28,8 +28,9 @@
 
 
 		</form:form>
+		</div>
 		<!-- include Footer -->
 		<%@ include file="footer.jsp"%>
-	</div>
+	
 </body>
 </html>

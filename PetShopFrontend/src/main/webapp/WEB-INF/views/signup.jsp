@@ -41,7 +41,7 @@
 							<spring:message text="First Name" />
 						</form:label>
 						<form:input path="firstname" class="form-control"
-							pattern="^[a-zA-Z]+$" title="Example:Jerry" />
+							pattern="^[a-zA-Z]+$" title="Example:Adolf" />
 
 						<!-- to display validation messages -->
 						<c:forEach
@@ -59,7 +59,7 @@
 							<spring:message text="Last Name" />
 						</form:label>
 						<form:input path="lastname" class="form-control"
-							pattern="^[a-zA-Z]+$" title="Example:Tom" />
+							pattern="^[a-zA-Z]+$" title="Example:Hitler" />
 
 						<c:forEach
 							items="${flowRequestContext.messageContext.getMessagesBySource('lastname')}"
@@ -74,7 +74,7 @@
 						<form:label path="username" class="control-label">
 							<spring:message text="User Name" />
 						</form:label>
-						<form:input path="username" class="form-control" />
+						<form:input path="username" pattern="^[a-zA-Z0-9]+$" class="form-control" />
 
 						<c:forEach
 							items="${flowRequestContext.messageContext.getMessagesBySource('username')}"
@@ -89,8 +89,7 @@
 						<form:label path="email" class="control-label">
 							<spring:message text="Email" />
 						</form:label>
-						<form:input path="email" class="form-control" />
-
+						<form:input path="email" pattern="^[a-z0-9._%+-]+@gmail+\.[a-z]{2,3}$" class="form-control" />
 						<c:forEach
 							items="${flowRequestContext.messageContext.getMessagesBySource('email')}"
 							var="err">
@@ -121,7 +120,7 @@
 							<spring:message text="Password" />
 						</form:label>
 						<form:input type='password' path="password"
-							title="Example: xxXxxx$3- Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+							title="Password Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
 							pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
 							class="form-control" />
 						<c:forEach
@@ -133,12 +132,12 @@
 						</c:forEach>
 					</div>
 
-					<div class="form-group">
+					<%-- <div class="form-group">
 						<form:label path="confirmpassword" class="control-label">
 							<spring:message text="Confirm Password" />
 						</form:label>
 						<form:input type='password' path="confirmpassword"
-							title="Example: xxXxxx$3- Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+							title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
 							pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
 							class="form-control" />
 						<c:forEach
@@ -148,7 +147,7 @@
 								<span>${err.text}</span>
 							</div>
 						</c:forEach>
-					</div>
+					</div> --%>
 
 					<!-- for triggering webflow events using form submission,
 					the eventId to be triggered is given in "name" attribute as:
@@ -167,5 +166,7 @@
 
 	<!-- include Footer -->
 	<%@ include file="footer.jsp"%>
+	
+	<!-- pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" -->
 </body>
 </html>

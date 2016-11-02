@@ -15,7 +15,7 @@ color: white;}
 
 <%@ include file="header.jsp"%>
 <br><br>
-<div class="container">
+<div class="container" align="justify">
 <div>
 Petshop.in is an eminent online pet food shop that caters to needs of
 growing pet owners all over India. We started this online pet supplies
